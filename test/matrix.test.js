@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { transpose } from '../src/matrix.js'; 
+import { transpose, add, multiply } from '../src/matrix.js';
 
 describe('TDD Matrix Library', () => {
 
@@ -14,4 +14,21 @@ describe('TDD Matrix Library', () => {
     });
   });
 
+  describe('add', () => {
+    it('should correctly add two 2x2 matrices', () => {
+        const m1 = [[1, 2], [3, 4]];
+        const m2 = [[5, 6], [7, 8]];
+        const expected = [[6, 8], [10, 12]];
+
+        const result = add(m1, m2);
+        expect(result).to.deep.equal(expected);
+    });
+
+    it('should throw an error when adding matrices of different sizes', () => {
+        const m1 = [[1, 2], [3, 4]];
+        const m2 = [[1], [2]]; 
+
+        expect(() => add(m1, m2)).to.throw('Matrices must have the same dimensions for addition');
+    });
+  });
 });
