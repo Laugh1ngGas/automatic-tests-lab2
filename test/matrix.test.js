@@ -31,4 +31,31 @@ describe('TDD Matrix Library', () => {
         expect(() => add(m1, m2)).to.throw('Matrices must have the same dimensions for addition');
     });
   });
+
+  describe('multiply', () => {
+    it('should correctly multiply two 2x2 matrices', () => {
+      const m1 = [[1, 2], [3, 4]];
+      const m2 = [[5, 6], [7, 8]];
+      const expected = [[19, 22], [43, 50]];
+
+      const result = multiply(m1, m2);
+      expect(result).to.deep.equal(expected);
+    });
+
+    it('should correctly multiply a 2x3 matrix by a 3x2 matrix', () => {
+      const m1 = [[1, 2, 3], [4, 5, 6]];
+      const m2 = [[7, 8], [9, 10], [11, 12]];
+      const expected = [[58, 64], [139, 154]];
+
+      const result = multiply(m1, m2);
+      expect(result).to.deep.equal(expected);
+    });
+
+    it('should throw an error if M1 columns do not equal M2 rows', () => {
+      const m1 = [[1, 2], [3, 4]];
+      const m2 = [[1, 2], [3, 4], [5, 6]];
+
+      expect(() => multiply(m1, m2)).to.throw('Column count of the first matrix must equal row count of the second');
+    });
+  });
 });
